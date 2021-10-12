@@ -1,0 +1,19 @@
+{
+  "name": "@teleporthq/teleport-custom-scripts",
+  "version": "0.0.1",
+  "main": "dist/index.js",
+  "private": false,
+  "description": "Custom scripts ready to be injected in to the playground",
+  "scripts": {},
+  "engines": {
+    "node": "16.x"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/teleporthq/teleport-custom-scripts.git"
+  },
+  "author": "teleportHQ",
+  "license": "MIT",
+  "homepage": "https://teleporthq.io/",
+  "devDependencies": {}
+}
