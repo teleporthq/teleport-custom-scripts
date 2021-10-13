@@ -1,10 +1,13 @@
 {
   "name": "@teleporthq/teleport-custom-scripts",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "main": "dist/index.js",
   "private": false,
   "description": "Custom scripts ready to be injected in to the playground",
-  "scripts": {},
+  "scripts": {
+    "build": "echo 'build'",
+    "prepublish": "npm run build"
+  },
   "engines": {
     "node": "16.x"
   },
@@ -14,6 +17,6 @@
   },
   "author": "teleportHQ",
   "license": "MIT",
-  "homepage": "https://teleporthq.io/",
+  "homepage": "https://teleporthq.io",
   "devDependencies": {}
 }
