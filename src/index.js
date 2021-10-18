@@ -1,7 +1,7 @@
 (function () {
   class Menu {
     init = () => {
-      this.updateOnRouteChange()
+      this.listenForUrlChanges()
       this.getMenuElementsAndAddEvents()
       return this;
     };
@@ -31,7 +31,7 @@
         }
 
         const closeMenuElement = mobileMenuElement.querySelector(
-          ".teleport-menu-close"
+          '*[class*="teleport-menu-close"]'
         );
         if (!closeMenuElement) {
           teleport.error(
@@ -49,12 +49,12 @@
       });
     };
 
-    updateOnRouteChange = () => {
+    listenForUrlChanges = () => {
       let url = location.href;
       document.body.addEventListener('click', () => {
         requestAnimationFrame(() => {
           if (url !== location.href) {
-            console.log('url changed');
+            console.log('URL changed');
             this.getMenuElementsAndAddEvents()
             url = location.href
           }
@@ -88,7 +88,7 @@
       }
       return elements;
     },
-    Menu
+    Menu,
   }
 
   new Menu().init()
