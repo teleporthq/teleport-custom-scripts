@@ -1,15 +1,38 @@
 (function () {
   class Menu {
     init = () => {
-      this.listenForUrlChanges()
       this.getMenuElementsAndAddEvents()
+      this.getMenuElementsAndAddEventsByDataAttrs()
       return this;
     };
+
+    getMenuElementsAndAddEventsByDataAttrs = () => {
+      const allHeaders = teleport.getAllElementsByDataAttribute('role', 'Header')
+
+      if (!allHeaders.length) {
+        teleport.log("No teleport Headers found in your project")
+      }
+
+      allHeaders.forEach(header => {
+        const burgerBtn = teleport.getElByDataAttribute('type', 'BurgerMenu', header)
+        const mobileMenu = teleport.getElByDataAttribute('type', 'MobileMenu', header)
+        const closeBtn = teleport.getElByDataAttribute('type', 'CloseMobileMenu', header)
+
+        burgerBtn.addEventListener('click', () => {
+          mobileMenu.classList.add('teleport-show')
+        })
+
+        closeBtn.addEventListener('click', () => {
+          mobileMenu.classList.remove('teleport-show')
+        })
+      })
+
+    }
 
     getMenuElementsAndAddEvents = () => {
       const menuElements = teleport.getAllElByClass(
         "teleport-menu-burger"
-      );
+      )
 
       if (!menuElements.length) {
         teleport.log("No teleport-menu-burger items found");
@@ -48,19 +71,44 @@
         });
       });
     };
+  }
 
-    listenForUrlChanges = () => {
-      let url = location.href;
-      document.body.addEventListener('click', () => {
-        requestAnimationFrame(() => {
-          if (url !== location.href) {
-            console.log('URL changed');
-            this.getMenuElementsAndAddEvents()
-            url = location.href
-          }
-        });
-      }, true);
+  class Accordion {
+    init = () => {
+      this.getAccordionElementsAndAddEvents()
     }
+
+    getAccordionElementsAndAddEvents = () => {
+      const allAccordions = teleport.getAllElementsByDataAttribute('role', 'Accordion')
+
+      if (!allAccordions.length) {
+        teleport.log("No teleport Accordions found in project")
+      }
+
+      allAccordions.forEach(accordion => {
+        const accordionHeader = teleport.getElByDataAttribute('type', 'AccordionHeader', accordion)
+        const accordionContent = teleport.getElByDataAttribute('type', 'AccordionContent', accordion)
+
+        accordionHeader.addEventListener('click', () => {
+          accordionContent.style.maxHeight ?
+            accordionContent.style.maxHeight = "" :
+            accordionContent.style.maxHeight = `${accordionContent.scrollHeight}px`
+        })
+      })
+    }
+  }
+
+  const listenForUrlChanges = () => {
+    let url = location.href;
+    document.body.addEventListener('click', () => {
+      requestAnimationFrame(() => {
+        if (url !== location.href) {
+          new Menu().init()
+          new Accordion().init()
+          url = location.href
+        }
+      });
+    }, true);
   }
 
   const teleport = {
@@ -81,6 +129,10 @@
       }
       return el;
     },
+    getElByDataAttribute: (attribute, value, scope = document) => {
+      const el = scope.querySelector(`[data-${attribute}="${value}"]`)
+      return el
+    },
     getAllElByClass: (className) => {
       const elements = document.querySelectorAll(`*[class*="${className}"]`);
       if (!elements) {
@@ -88,10 +140,21 @@
       }
       return elements;
     },
+    getAllElementsByDataAttribute: (attribute, value, scope = document) => {
+      const elements = scope.querySelectorAll(`[data-${attribute}="${value}"]`)
+      if (!elements) {
+        teleport.error(`did not find any elements with data-${attribute}=${value}`);
+      }
+      return elements
+    },
     Menu,
+    Accordion,
   }
 
+  listenForUrlChanges()
+
   new Menu().init()
+  new Accordion().init()
 })()
 
 
