@@ -123,27 +123,29 @@
     },
     getElByClass: (className) => {
       const el = document.querySelector(`*[class*="${className}"]`);
-
       if (!el) {
-        teleport.error(`did not find ${className} class`);
+        teleport.log(`did not find element with "${className}" class`);
       }
       return el;
     },
     getElByDataAttribute: (attribute, value, scope = document) => {
       const el = scope.querySelector(`[data-${attribute}="${value}"]`)
+      if (!el) {
+        teleport.log(`did not find element with "data-${attribute}=${value}"`)
+      }
       return el
     },
     getAllElByClass: (className) => {
       const elements = document.querySelectorAll(`*[class*="${className}"]`);
       if (!elements) {
-        teleport.error(`did not find ${className} class`);
+        teleport.log(`did not find any elements with "${className}" class`);
       }
       return elements;
     },
     getAllElementsByDataAttribute: (attribute, value, scope = document) => {
       const elements = scope.querySelectorAll(`[data-${attribute}="${value}"]`)
       if (!elements) {
-        teleport.error(`did not find any elements with data-${attribute}=${value}`);
+        teleport.log(`did not find any elements with "data-${attribute}=${value}"`);
       }
       return elements
     },
