@@ -1,38 +1,97 @@
 (function () {
   class Menu {
     init = () => {
-      this.getMenuElementsAndAddEvents()
-      this.getMenuElementsAndAddEventsByDataAttrs()
+      this.getMenuElementsAndAddEvents();
+      this.getMenuElementsAndAddEventsByDataAttrs();
+      this.getNavbarElementsAndAddEventsByDataThqAttrs();
       return this;
     };
 
     getMenuElementsAndAddEventsByDataAttrs = () => {
-      const allHeaders = teleport.getAllElementsByDataAttribute('role', 'Header')
+      const allHeaders = teleport.getAllElementsByDataAttribute(
+        "role",
+        "Header"
+      );
 
-      if (!allHeaders.length) {
-        teleport.log("No teleport Headers found in your project")
+      if (allHeaders.length === 0) {
+        teleport.log("No teleport Headers found in your project");
       }
 
-      allHeaders.forEach(header => {
-        const burgerBtn = teleport.getElByDataAttribute('type', 'BurgerMenu', header)
-        const mobileMenu = teleport.getElByDataAttribute('type', 'MobileMenu', header)
-        const closeBtn = teleport.getElByDataAttribute('type', 'CloseMobileMenu', header)
+      allHeaders.forEach((header) => {
+        const burgerBtn = teleport.getElByDataAttribute(
+          "type",
+          "BurgerMenu",
+          header
+        );
+        const mobileMenu = teleport.getElByDataAttribute(
+          "type",
+          "MobileMenu",
+          header
+        );
+        const closeBtn = teleport.getElByDataAttribute(
+          "type",
+          "CloseMobileMenu",
+          header
+        );
 
-        burgerBtn.addEventListener('click', () => {
-          mobileMenu.classList.add('teleport-show')
-        })
+        burgerBtn.addEventListener("click", () => {
+          mobileMenu.classList.add("teleport-show");
+        });
 
-        closeBtn.addEventListener('click', () => {
-          mobileMenu.classList.remove('teleport-show')
-        })
-      })
+        closeBtn.addEventListener("click", () => {
+          mobileMenu.classList.remove("teleport-show");
+        });
+      });
+    };
 
-    }
+    getNavbarElementsAndAddEventsByDataThqAttrs = () => {
+      const allNavbars = teleport.getAllElementsByDataAttribute(
+        "thq",
+        "thq-navbar"
+      );
+
+      if (allNavbars.length === 0) {
+        teleport.log("No teleport Navbars found in your project");
+      }
+
+      allNavbars.forEach((navbar) => {
+        const burgerBtn = teleport.getElByDataAttribute(
+          "thq",
+          "thq-burger-menu",
+          navbar
+        );
+        const mobileMenu = teleport.getElByDataAttribute(
+          "thq",
+          "thq-mobile-menu",
+          navbar
+        );
+        const closeBtn = teleport.getElByDataAttribute(
+          "thq",
+          "thq-close-menu",
+          navbar
+        );
+
+        if (!burgerBtn || !mobileMenu || !closeBtn) {
+          teleport.error(
+            "The navbar elements (burger button, mobile menu, close button) could not be found.",
+            navbar
+          );
+        }
+
+        burgerBtn.addEventListener("click", () => {
+          mobileMenu.classList.add("thq-show");
+          mobileMenu.classList.add("thq-translate-to-default");
+        });
+
+        closeBtn.addEventListener("click", () => {
+          mobileMenu.classList.remove("thq-show");
+          mobileMenu.classList.remove("thq-translate-to-default");
+        });
+      });
+    };
 
     getMenuElementsAndAddEvents = () => {
-      const menuElements = teleport.getAllElByClass(
-        "teleport-menu-burger"
-      )
+      const menuElements = teleport.getAllElByClass("teleport-menu-burger");
 
       if (!menuElements.length) {
         teleport.log("No teleport-menu-burger items found");
@@ -44,7 +103,7 @@
           burgerMenuElement.nextElementSibling?.className.includes(
             "teleport-menu-mobile"
           )
-            ? (burgerMenuElement.nextElementSibling)
+            ? burgerMenuElement.nextElementSibling
             : null;
         if (!mobileMenuElement) {
           teleport.error(
@@ -75,41 +134,56 @@
 
   class Accordion {
     init = () => {
-      this.getAccordionElementsAndAddEvents()
-    }
+      this.getAccordionElementsAndAddEvents();
+    };
 
     getAccordionElementsAndAddEvents = () => {
-      const allAccordions = teleport.getAllElementsByDataAttribute('role', 'Accordion')
+      const allAccordions = teleport.getAllElementsByDataAttribute(
+        "role",
+        "Accordion"
+      );
 
       if (!allAccordions.length) {
-        teleport.log("No teleport Accordions found in project")
+        teleport.log("No teleport Accordions found in project");
       }
 
-      allAccordions.forEach(accordion => {
-        const accordionHeader = teleport.getElByDataAttribute('type', 'AccordionHeader', accordion)
-        const accordionContent = teleport.getElByDataAttribute('type', 'AccordionContent', accordion)
+      allAccordions.forEach((accordion) => {
+        const accordionHeader = teleport.getElByDataAttribute(
+          "type",
+          "AccordionHeader",
+          accordion
+        );
+        const accordionContent = teleport.getElByDataAttribute(
+          "type",
+          "AccordionContent",
+          accordion
+        );
 
-        accordionHeader.addEventListener('click', () => {
-          accordionContent.style.maxHeight ?
-            accordionContent.style.maxHeight = "" :
-            accordionContent.style.maxHeight = `${accordionContent.scrollHeight}px`
-        })
-      })
-    }
+        accordionHeader.addEventListener("click", () => {
+          accordionContent.style.maxHeight
+            ? (accordionContent.style.maxHeight = "")
+            : (accordionContent.style.maxHeight = `${accordionContent.scrollHeight}px`);
+        });
+      });
+    };
   }
 
   const listenForUrlChanges = () => {
     let url = location.href;
-    document.body.addEventListener('click', () => {
-      requestAnimationFrame(() => {
-        if (url !== location.href) {
-          new Menu().init()
-          new Accordion().init()
-          url = location.href
-        }
-      });
-    }, true);
-  }
+    document.body.addEventListener(
+      "click",
+      () => {
+        requestAnimationFrame(() => {
+          if (url !== location.href) {
+            new Menu().init();
+            new Accordion().init();
+            url = location.href;
+          }
+        });
+      },
+      true
+    );
+  };
 
   const teleport = {
     debug: false,
@@ -129,11 +203,11 @@
       return el;
     },
     getElByDataAttribute: (attribute, value, scope = document) => {
-      const el = scope.querySelector(`[data-${attribute}="${value}"]`)
+      const el = scope.querySelector(`[data-${attribute}="${value}"]`);
       if (!el) {
-        teleport.log(`did not find element with "data-${attribute}=${value}"`)
+        teleport.log(`did not find element with "data-${attribute}=${value}"`);
       }
-      return el
+      return el;
     },
     getAllElByClass: (className) => {
       const elements = document.querySelectorAll(`*[class*="${className}"]`);
@@ -143,20 +217,20 @@
       return elements;
     },
     getAllElementsByDataAttribute: (attribute, value, scope = document) => {
-      const elements = scope.querySelectorAll(`[data-${attribute}="${value}"]`)
+      const elements = scope.querySelectorAll(`[data-${attribute}="${value}"]`);
       if (!elements) {
-        teleport.log(`did not find any elements with "data-${attribute}=${value}"`);
+        teleport.log(
+          `did not find any elements with "data-${attribute}=${value}"`
+        );
       }
-      return elements
+      return elements;
     },
     Menu,
     Accordion,
-  }
+  };
 
-  listenForUrlChanges()
+  listenForUrlChanges();
 
-  new Menu().init()
-  new Accordion().init()
-})()
-
-
+  new Menu().init();
+  new Accordion().init();
+})();
