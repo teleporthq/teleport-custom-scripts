@@ -37,7 +37,7 @@
         if (!burgerBtn || !mobileMenu || !closeBtn) {
           teleport.error(
             "The header elements (burger button, mobile menu, close button) could not be found.",
-            navbar
+            header
           );
           return;
         }
