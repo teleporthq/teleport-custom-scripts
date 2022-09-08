@@ -34,6 +34,14 @@
           header
         );
 
+        if (!burgerBtn || !mobileMenu || !closeBtn) {
+          teleport.error(
+            "The header elements (burger button, mobile menu, close button) could not be found.",
+            navbar
+          );
+          return;
+        }
+
         burgerBtn.addEventListener("click", () => {
           mobileMenu.classList.add("teleport-show");
         });
@@ -76,6 +84,7 @@
             "The navbar elements (burger button, mobile menu, close button) could not be found.",
             navbar
           );
+          return;
         }
 
         burgerBtn.addEventListener("click", () => {
@@ -93,7 +102,7 @@
     getMenuElementsAndAddEvents = () => {
       const menuElements = teleport.getAllElByClass("teleport-menu-burger");
 
-      if (!menuElements.length) {
+      if (menuElements.length === 0) {
         teleport.log("No teleport-menu-burger items found");
         return;
       }
