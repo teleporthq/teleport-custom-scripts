@@ -1,6 +1,6 @@
 {
   "name": "@teleporthq/teleport-custom-scripts",
-  "version": "0.0.11",
+  "version": "0.0.12",
   "main": "src/index.js",
   "private": false,
   "description": "Custom scripts ready to be injected in to the playground",
