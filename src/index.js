@@ -19,17 +19,17 @@
 
       allHeaders.forEach((header) => {
         const burgerBtn = teleport.getElByDataAttribute(
-          "type",
+          "role",
           "BurgerMenu",
           header
         );
         const mobileMenu = teleport.getElByDataAttribute(
-          "type",
+          "role",
           "MobileMenu",
           header
         );
         const closeBtn = teleport.getElByDataAttribute(
-          "type",
+          "role",
           "CloseMobileMenu",
           header
         );
@@ -158,12 +158,12 @@
 
       allAccordions.forEach((accordion) => {
         const accordionHeader = teleport.getElByDataAttribute(
-          "type",
+          "role",
           "AccordionHeader",
           accordion
         );
         const accordionContent = teleport.getElByDataAttribute(
-          "type",
+          "role",
           "AccordionContent",
           accordion
         );
