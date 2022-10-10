@@ -92,7 +92,7 @@
         });
 
         closeBtn.addEventListener("click", () => {
-          mobileMenu.classList.add("teleport-show");
+          mobileMenu.classList.remove("teleport-show");
         });
       });
     };
