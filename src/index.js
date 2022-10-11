@@ -19,17 +19,17 @@
 
       allHeaders.forEach((header) => {
         const burgerBtn = teleport.getElByDataAttribute(
-          "role",
+          "type",
           "BurgerMenu",
           header
         );
         const mobileMenu = teleport.getElByDataAttribute(
-          "role",
+          "type",
           "MobileMenu",
           header
         );
         const closeBtn = teleport.getElByDataAttribute(
-          "role",
+          "type",
           "CloseMobileMenu",
           header
         );
@@ -81,7 +81,7 @@
 
         if (!burgerBtn || !mobileMenu || !closeBtn) {
           teleport.error(
-            "The navbar elements (burger button, mobile menu, close button) could not be found.",
+            "The interactive navbar elements (burger button, mobile menu, close button) could not be found.",
             navbar
           );
           return;
@@ -113,7 +113,7 @@
             ? burgerMenuElement.nextElementSibling
             : null;
         if (!mobileMenuElement) {
-          teleport.error(
+          teleport.log(
             `${burgerMenuElement} has no corresponding element with class 'teleport-menu-mobile' as the next sibling.`
           );
           return;
@@ -123,7 +123,7 @@
           '*[class*="teleport-menu-close"]'
         );
         if (!closeMenuElement) {
-          teleport.error(
+          teleport.log(
             `${mobileMenuElement} has no child element with class 'teleport-menu-close'`
           );
           return;
@@ -156,12 +156,12 @@
 
       allAccordions.forEach((accordion) => {
         const accordionHeader = teleport.getElByDataAttribute(
-          "role",
+          "type",
           "AccordionHeader",
           accordion
         );
         const accordionContent = teleport.getElByDataAttribute(
-          "role",
+          "type",
           "AccordionContent",
           accordion
         );
