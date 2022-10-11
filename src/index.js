@@ -89,10 +89,14 @@
 
         burgerBtn.addEventListener("click", () => {
           mobileMenu.classList.add("teleport-show");
+          mobileMenu.classList.add("thq-show");
+          mobileMenu.classList.add("thq-translate-to-default");
         });
 
         closeBtn.addEventListener("click", () => {
           mobileMenu.classList.remove("teleport-show");
+          mobileMenu.classList.remove("thq-show");
+          mobileMenu.classList.remove("thq-translate-to-default");
         });
       });
     };
