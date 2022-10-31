@@ -2,43 +2,36 @@
   class Menu {
     init = () => {
       this.getMenuElementsAndAddEvents();
-      this.getMenuElementsAndAddEventsByDataAttrs();
+      this.getMenuElementsAndAddEventsByDataAttrs("type");
+      this.getMenuElementsAndAddEventsByDataAttrs("role");
       this.getNavbarElementsAndAddEventsByDataThqAttrs();
       return this;
     };
 
-    getMenuElementsAndAddEventsByDataAttrs = () => {
+    getMenuElementsAndAddEventsByDataAttrs = (dataAttr) => {
       const allHeaders = teleport.getAllElementsByDataAttribute(
         "role",
         "Header"
       );
 
-      if (allHeaders.length === 0) {
-        teleport.log("No teleport Headers found in your project");
-      }
-
       allHeaders.forEach((header) => {
         const burgerBtn = teleport.getElByDataAttribute(
-          "type",
+          dataAttr,
           "BurgerMenu",
           header
         );
         const mobileMenu = teleport.getElByDataAttribute(
-          "type",
+          dataAttr,
           "MobileMenu",
           header
         );
         const closeBtn = teleport.getElByDataAttribute(
-          "type",
+          dataAttr,
           "CloseMobileMenu",
           header
         );
 
         if (!burgerBtn || !mobileMenu || !closeBtn) {
-          teleport.error(
-            "The header elements (burger button, mobile menu, close button) could not be found.",
-            header
-          );
           return;
         }
 
@@ -58,10 +51,6 @@
         "thq-navbar"
       );
 
-      if (allNavbars.length === 0) {
-        teleport.log("No teleport Navbars found in your project");
-      }
-
       allNavbars.forEach((navbar) => {
         const burgerBtn = teleport.getElByDataAttribute(
           "thq",
@@ -80,10 +69,6 @@
         );
 
         if (!burgerBtn || !mobileMenu || !closeBtn) {
-          teleport.error(
-            "The interactive navbar elements (burger button, mobile menu, close button) could not be found.",
-            navbar
-          );
           return;
         }
 
@@ -145,27 +130,24 @@
 
   class Accordion {
     init = () => {
-      this.getAccordionElementsAndAddEvents();
+      this.getAccordionElementsAndAddEvents("type");
+      this.getAccordionElementsAndAddEvents("role");
     };
 
-    getAccordionElementsAndAddEvents = () => {
+    getAccordionElementsAndAddEvents = (dataAttr) => {
       const allAccordions = teleport.getAllElementsByDataAttribute(
         "role",
         "Accordion"
       );
 
-      if (!allAccordions.length) {
-        teleport.log("No teleport Accordions found in project");
-      }
-
       allAccordions.forEach((accordion) => {
         const accordionHeader = teleport.getElByDataAttribute(
-          "type",
+          dataAttr,
           "AccordionHeader",
           accordion
         );
         const accordionContent = teleport.getElByDataAttribute(
-          "type",
+          dataAttr,
           "AccordionContent",
           accordion
         );
