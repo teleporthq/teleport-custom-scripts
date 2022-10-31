@@ -152,6 +152,10 @@
           accordion
         );
 
+        if (!accordionHeader || !accordionContent) {
+          return;
+        }
+
         accordionHeader.addEventListener("click", () => {
           accordionContent.style.maxHeight
             ? (accordionContent.style.maxHeight = "")
