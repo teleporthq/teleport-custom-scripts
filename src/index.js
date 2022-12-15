@@ -226,8 +226,20 @@
     Accordion,
   };
 
-  listenForUrlChanges();
+  const appDiv = document.getElementById("app");
 
-  new Menu().init();
-  new Accordion().init();
+  if (appDiv) {
+    const observer = new MutationObserver(() => {
+      new Menu().init();
+      new Accordion().init();
+      observer.disconnect();
+      delete observer;
+    });
+    observer.observe(document.getElementById("app"), { childList: true });
+  } else {
+    new Menu().init();
+    new Accordion().init();
+  }
+
+  listenForUrlChanges();
 })();
