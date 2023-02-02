@@ -88,6 +88,10 @@
                 return;
               }
 
+              if (event.target.href) {
+                document.body.style.overflow = bodyOverflow;
+              }
+
               if (event.target.href === window.location.href) {
                 mobileMenu.classList.remove("teleport-show");
                 mobileMenu.classList.remove("thq-show");
