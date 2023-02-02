@@ -8,6 +8,24 @@
       return this;
     };
 
+    checkSameLinkClicked = (event, mobileMenu) => {
+      if (!event) {
+        return;
+      }
+      if (!event.srcElement.href) {
+        return;
+      }
+      if (!mobileMenu) {
+        return;
+      }
+
+      if (event.srcElement.href === window.location.href) {
+        mobileMenu.classList.remove("teleport-show");
+        mobileMenu.classList.remove("thq-show");
+        mobileMenu.classList.remove("thq-translate-to-default");
+      }
+    };
+
     getMenuElementsAndAddEventsByDataAttrs = (dataAttr) => {
       const allHeaders = teleport.getAllElementsByDataAttribute(
         "role",
@@ -51,6 +69,8 @@
         "thq-navbar"
       );
 
+      const bodyOverflow = document.body.style.overflow;
+
       allNavbars.forEach((navbar) => {
         const burgerBtn = teleport.getElByDataAttribute(
           "thq",
@@ -73,12 +93,21 @@
         }
 
         burgerBtn.addEventListener("click", () => {
+          window.addEventListener(
+            "click",
+            this.checkSameLinkClicked.bind(null, event, mobileMenu)
+          );
+          document.body.style.overflow = "hidden";
+
           mobileMenu.classList.add("teleport-show");
           mobileMenu.classList.add("thq-show");
           mobileMenu.classList.add("thq-translate-to-default");
         });
 
         closeBtn.addEventListener("click", () => {
+          window.removeEventListener("click", this.checkSameLinkClicked);
+          document.body.style.overflow = bodyOverflow;
+
           mobileMenu.classList.remove("teleport-show");
           mobileMenu.classList.remove("thq-show");
           mobileMenu.classList.remove("thq-translate-to-default");
