@@ -92,7 +92,7 @@
                 document.body.style.overflow = bodyOverflow;
               }
 
-              if (event.target.href === window.location.href) {
+              if (event.target.pathname === window.location.pathname) {
                 mobileMenu.classList.remove("teleport-show");
                 mobileMenu.classList.remove("thq-show");
                 mobileMenu.classList.remove("thq-translate-to-default");
