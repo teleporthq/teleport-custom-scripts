@@ -81,18 +81,27 @@
               if (!event) {
                 return;
               }
-              if (!event.target.href) {
+
+              // check for links in ascendent elements
+              let currentElement = event.target;
+
+              while (currentElement !== document.body && !currentElement.href) {
+                currentElement = currentElement.parentNode;
+              }
+
+              if (!currentElement.href) {
                 return;
               }
+
               if (!mobileMenu) {
                 return;
               }
 
-              if (event.target.href) {
+              if (currentElement.href) {
                 document.body.style.overflow = bodyOverflow;
               }
 
-              if (event.target.pathname === window.location.pathname) {
+              if (currentElement.pathname === window.location.pathname) {
                 mobileMenu.classList.remove("teleport-show");
                 mobileMenu.classList.remove("thq-show");
                 mobileMenu.classList.remove("thq-translate-to-default");
