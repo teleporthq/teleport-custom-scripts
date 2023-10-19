@@ -1,0 +1,27 @@
+version = 0.1
+
+default-task = "copy:build"
+
+[[task]]
+name = "build:umd"
+target = "dist/index.umd.js"
+deps = ["src/##.ts"]
+run = "vite build"
+
+[[task]]
+name = "build:esm"
+target = "dist/index.mjs"
+deps = ["src/##.ts"]
+run = "vite build"
+
+[[task]]
+name = 'copy:build'
+target = 'test/index.umd.js'
+deps = ['build:umd', 'build:esm']
+run = "cp dist/index.umd.js test"
+
+[[task]]
+name = 'test'
+target = 'test/index.html'
+deps = ['copy:build']
+run = 'npx http-server test'
