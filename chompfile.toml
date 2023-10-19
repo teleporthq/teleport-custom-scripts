@@ -3,27 +3,21 @@ version = 0.1
 default-task = "copy:build"
 
 [[task]]
-name = "build:umd"
-target = "dist/index.umd.js"
-deps = ["src/##.ts"]
-run = "vite build"
-
-[[task]]
 name = "build:esm"
-target = "dist/index.mjs"
+targets = ["dist/component.mjs"]
 deps = ["src/##.ts"]
 run = "vite build"
 
 [[task]]
-name = 'build:iife'
-target = "dist/component.mjs"
+name = 'build:umd'
+target = "dist/index.umd.js"
 deps = ['src/##.ts']
 run = "vite build -c vite.config.umd.js"
 
 [[task]]
 name = 'copy:build'
 target = 'test/index.umd.js'
-deps = ['build:umd', 'build:esm', 'build:iife']
+deps = ['build:umd', 'build:esm']
 run = "cp dist/index.umd.js test"
 
 [[task]]
