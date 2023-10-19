@@ -18,7 +18,7 @@ run = "vite build"
 name = 'build:iife'
 target = "dist/component.mjs"
 deps = ['src/##.ts']
-run = "vite build -c vite.config.iife.js"
+run = "vite build -c vite.config.umd.js"
 
 [[task]]
 name = 'copy:build'
