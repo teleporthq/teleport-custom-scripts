@@ -15,9 +15,15 @@ deps = ["src/##.ts"]
 run = "vite build"
 
 [[task]]
+name = 'build:iife'
+target = "dist/component.mjs"
+deps = ['src/##.ts']
+run = "vite build -c vite.config.iife.js"
+
+[[task]]
 name = 'copy:build'
 target = 'test/index.umd.js'
-deps = ['build:umd', 'build:esm']
+deps = ['build:umd', 'build:esm', 'build:iife']
 run = "cp dist/index.umd.js test"
 
 [[task]]

@@ -9,9 +9,8 @@ export default defineConfig({
       name: 'index',
       entry: {
         index: resolve(__dirname, "src/index.ts"),
-        components: resolve(__dirname, "src/components.ts")
       },
-      formats: ["es"],
+      formats: ["iife"],
     }
   },
   plugins: [],
