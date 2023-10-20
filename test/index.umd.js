@@ -1081,9 +1081,6 @@
     }
     `;
     }
-    get defaultStyles() {
-      return "";
-    }
     handleClickEvent(ev) {
       if (ev instanceof MouseEvent === false && ev instanceof KeyboardEvent === false) {
         return;
