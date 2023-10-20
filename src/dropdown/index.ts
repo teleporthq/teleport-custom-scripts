@@ -52,10 +52,6 @@ export class Dropdown implements TeleportInteractiveElement {
     `;
   }
 
-  get defaultStyles() {
-    return '';
-  }
-
   handleClickEvent(ev: MouseEvent) {
     if (ev instanceof MouseEvent === false && ev instanceof KeyboardEvent === false) {
       return
