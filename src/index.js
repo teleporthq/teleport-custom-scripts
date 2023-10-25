@@ -276,7 +276,7 @@
       observer.disconnect();
       delete observer;
     });
-    observer.observe(document.getElementById("app"), { childList: true });
+    observer.observe(document.body, { childList: true });
   } else {
     new Menu().init();
     new Accordion().init();
