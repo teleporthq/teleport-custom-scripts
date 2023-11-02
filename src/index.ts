@@ -3,11 +3,6 @@ import { Menu } from './menu'
 import { Accordion } from './accordion'
 import { Slider } from './slider'
 
-new Dropdown().init()
-new Menu().init();
-new Accordion().init();
-new Slider().init()
-
 let url = location.href;
 document.body.addEventListener(
   "click",
@@ -24,3 +19,20 @@ document.body.addEventListener(
   },
   true
 );
+
+const appDiv = document.getElementById("app");
+if (appDiv) {
+  const observer = new MutationObserver(() => {
+    new Dropdown().init()
+    new Menu().init();
+    new Accordion().init();
+    new Slider().init()
+    observer.disconnect();
+  });
+  observer.observe(document.body, { childList: true });
+} else {
+  new Dropdown().init()
+  new Menu().init();
+  new Accordion().init();
+  new Slider().init()
+}
