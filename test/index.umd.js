@@ -5194,9 +5194,13 @@ var __privateSet = (obj, member, value, setter) => {
       return node.outerHTML;
     } else if (node instanceof Text) {
       return node.textContent;
-    } else {
-      return "Cannot get string representation for this node type.";
     }
+    if (node == null ? void 0 : node.outerHTML) {
+      return node.outerHTML;
+    } else if (node == null ? void 0 : node.textContent) {
+      return node.textContent;
+    }
+    return "Cannot get string representation for this node type.";
   };
   class Slider {
     constructor() {

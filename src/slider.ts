@@ -10,9 +10,22 @@ const getDOMStringRepresentation = (node: HTMLElement | Text) => {
     return node.outerHTML;
   } else if (node instanceof Text) {
     return node.textContent;
-  } else {
-    return "Cannot get string representation for this node type.";
   }
+
+  /*
+    When we generate the DOM representation from one iframe scope
+    and move to another iframe scope, the node will be a different.
+    Event if both are instance of thier respective HTMLElement or Text.
+
+    So, it's a hack to get the string representation of the node.
+  */
+  if ((node as HTMLElement)?.outerHTML) {
+    return (node as HTMLElement).outerHTML;
+  } else if ((node as Text)?.textContent) {
+    return (node as Text).textContent;
+  }
+
+  return "Cannot get string representation for this node type.";
 };
 
 export class Slider {
