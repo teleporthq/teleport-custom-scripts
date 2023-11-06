@@ -1,3 +1,3 @@
-export { Dropdown } from './dropdown'
+export { Slider } from './slider'
 export { Accordion } from './accordion'
 export { Menu } from './menu'

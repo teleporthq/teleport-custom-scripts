@@ -5273,6 +5273,192 @@ var __privateSet = (obj, member, value, setter) => {
     }
   }
   _sliderInstances = new WeakMap();
+  const getElByDataAttribute = (attribute, value, scope = document) => {
+    const el = scope.querySelector(`[data-${attribute}="${value}"]`);
+    return el;
+  };
+  const getAllElByClass = (className) => {
+    const elements = document.querySelectorAll(`*[class*="${className}"]`);
+    return elements;
+  };
+  const getAllElementsByDataAttribute = (attribute, value, scope = document) => {
+    const elements = scope.querySelectorAll(`[data-${attribute}="${value}"]`);
+    return elements;
+  };
+  class Menu {
+    constructor() {
+      this.init = () => {
+        this.getMenuElementsAndAddEvents();
+        this.getMenuElementsAndAddEventsByDataAttrs("type");
+        this.getMenuElementsAndAddEventsByDataAttrs("role");
+        this.getNavbarElementsAndAddEventsByDataThqAttrs();
+        return this;
+      };
+      this.getMenuElementsAndAddEventsByDataAttrs = (dataAttr) => {
+        const allHeaders = getAllElementsByDataAttribute(
+          "role",
+          "Header"
+        );
+        allHeaders.forEach((header) => {
+          const burgerBtn = getElByDataAttribute(
+            dataAttr,
+            "BurgerMenu",
+            header
+          );
+          const mobileMenu = getElByDataAttribute(
+            dataAttr,
+            "MobileMenu",
+            header
+          );
+          const closeBtn = getElByDataAttribute(
+            dataAttr,
+            "CloseMobileMenu",
+            header
+          );
+          if (!burgerBtn || !mobileMenu || !closeBtn) {
+            return;
+          }
+          burgerBtn.addEventListener("click", () => {
+            mobileMenu.classList.add("teleport-show");
+          });
+          closeBtn.addEventListener("click", () => {
+            mobileMenu.classList.remove("teleport-show");
+          });
+        });
+      };
+      this.getNavbarElementsAndAddEventsByDataThqAttrs = () => {
+        const allNavbars = getAllElementsByDataAttribute(
+          "thq",
+          "thq-navbar"
+        );
+        const bodyOverflow = document.body.style.overflow;
+        allNavbars.forEach((navbar) => {
+          const burgerBtn = getElByDataAttribute(
+            "thq",
+            "thq-burger-menu",
+            navbar
+          );
+          const mobileMenu = getElByDataAttribute(
+            "thq",
+            "thq-mobile-menu",
+            navbar
+          );
+          const closeBtn = getElByDataAttribute(
+            "thq",
+            "thq-close-menu",
+            navbar
+          );
+          if (!burgerBtn || !mobileMenu || !closeBtn) {
+            return;
+          }
+          burgerBtn.addEventListener("click", () => {
+            window.addEventListener(
+              "click",
+              function checkSameLinkClicked(event) {
+                if (!event) {
+                  return;
+                }
+                let currentElement = event.target;
+                while (currentElement !== document.body && !currentElement.href) {
+                  currentElement = currentElement.parentNode;
+                }
+                if (!currentElement.href) {
+                  return;
+                }
+                if (!mobileMenu) {
+                  return;
+                }
+                if (currentElement.href) {
+                  document.body.style.overflow = bodyOverflow;
+                }
+                if (currentElement.pathname === window.location.pathname) {
+                  mobileMenu.classList.remove("teleport-show");
+                  mobileMenu.classList.remove("thq-show");
+                  mobileMenu.classList.remove("thq-translate-to-default");
+                }
+                this.removeEventListener("click", checkSameLinkClicked);
+              }
+            );
+            document.body.style.overflow = "hidden";
+            mobileMenu.classList.add("teleport-show");
+            mobileMenu.classList.add("thq-show");
+            mobileMenu.classList.add("thq-translate-to-default");
+          });
+          closeBtn.addEventListener("click", () => {
+            document.body.style.overflow = bodyOverflow;
+            mobileMenu.classList.remove("teleport-show");
+            mobileMenu.classList.remove("thq-show");
+            mobileMenu.classList.remove("thq-translate-to-default");
+          });
+        });
+      };
+      this.getMenuElementsAndAddEvents = () => {
+        const menuElements = getAllElByClass("teleport-menu-burger");
+        if (menuElements.length === 0) {
+          return;
+        }
+        menuElements.forEach((burgerMenuElement) => {
+          var _a;
+          const mobileMenuElement = ((_a = burgerMenuElement.nextElementSibling) == null ? void 0 : _a.className.includes(
+            "teleport-menu-mobile"
+          )) ? burgerMenuElement.nextElementSibling : null;
+          if (!mobileMenuElement) {
+            return;
+          }
+          const closeMenuElement = mobileMenuElement.querySelector(
+            '*[class*="teleport-menu-close"]'
+          );
+          if (!closeMenuElement) {
+            return;
+          }
+          burgerMenuElement.addEventListener("click", () => {
+            mobileMenuElement.classList.add("teleport-show");
+          });
+          closeMenuElement.addEventListener("click", () => {
+            mobileMenuElement.classList.remove("teleport-show");
+          });
+        });
+      };
+    }
+    get styles() {
+      return ``;
+    }
+  }
+  class Accordion {
+    constructor() {
+      this.init = () => {
+        this.getAccordionElementsAndAddEvents("type");
+        this.getAccordionElementsAndAddEvents("role");
+      };
+      this.getAccordionElementsAndAddEvents = (dataAttr) => {
+        const allAccordions = getAllElementsByDataAttribute(
+          "role",
+          "Accordion"
+        );
+        allAccordions.forEach((accordion) => {
+          const accordionHeader = getElByDataAttribute(
+            dataAttr,
+            "AccordionHeader",
+            accordion
+          );
+          const accordionContent = getElByDataAttribute(
+            dataAttr,
+            "AccordionContent",
+            accordion
+          );
+          if (!accordionHeader || !accordionContent) {
+            return;
+          }
+          accordionHeader.addEventListener("click", () => {
+            accordionContent.style.maxHeight ? accordionContent.style.maxHeight = "" : accordionContent.style.maxHeight = `${accordionContent.scrollHeight}px`;
+          });
+        });
+      };
+    }
+    get styles() {
+      return ``;
+    }
+  }
   let url = location.href;
   document.body.addEventListener(
     "click",
@@ -5280,6 +5466,8 @@ var __privateSet = (obj, member, value, setter) => {
       requestAnimationFrame(() => {
         if (url !== location.href) {
           new Slider().init();
+          new Menu().init();
+          new Accordion().init();
           url = location.href;
         }
       });
@@ -5290,6 +5478,8 @@ var __privateSet = (obj, member, value, setter) => {
   if (appDiv) {
     const observer = new MutationObserver(() => {
       new Slider().init();
+      new Menu().init();
+      new Accordion().init();
       observer.disconnect();
     });
     observer.observe(document.body, { childList: true });
