@@ -104,3 +104,4 @@ dist
 .tern-port
 
 test/index.umd.js
+test/style.css

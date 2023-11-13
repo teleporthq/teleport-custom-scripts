@@ -36,15 +36,36 @@ export class Slider {
     for (const sliderElement of sliderElements) {
       const identifier = Array.from(sliderElement.classList).join(".");
       const properties = sliderElement.dataset;
-      const nextButton = sliderElement.querySelector<HTMLElement>(
+      const nextButtons = sliderElement.querySelectorAll<HTMLElement>(
         '[data-thq="slider-button-next"]',
       );
-      const prevButton = sliderElement.querySelector<HTMLElement>(
+      const prevButtons = sliderElement.querySelectorAll<HTMLElement>(
         '[data-thq="slider-button-prev"]',
       );
       const paginationElm = sliderElement.querySelector<HTMLElement>(
         '[data-thq="slider-pagination"]',
       );
+
+      let nextButton: HTMLElement | null = null
+      let prevButton: HTMLElement | null = null
+
+      /*
+        The sliders can be nested any number of times.
+        Just querySelector gives the first amtch. And not the direct clid of the slider.
+        So, we need to map through all the selectors and find the direct children.
+      */
+
+      for(const next of nextButtons) {
+        if (next.parentNode === sliderElement) {
+          nextButton = next
+        }
+      }
+
+      for(const prev of prevButtons) {
+        if (prev.parentNode === sliderElement) {
+          prevButton = prev
+        }
+      }
 
       const autoplay = JSON.parse(properties.autoplay ?? "false");
       const autoPlayDelay = JSON.parse(properties.autoplayDelay ?? "3000");

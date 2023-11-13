@@ -14,97 +14,188 @@
     </style>
   </head>
   <body>
-    <!-- <div data-thq="thq-dropdown">
-        <div data-thq="thq-dropdown-toggle">
-        <span>Menu Item</span>
-        <div data-thq="thq-dropdown-arrow">
-            <svg viewBox="0 0 1024 1024">
-            <path d="M426 726v-428l214 214z"></path>
-            </svg>
+    <div>
+      <link href="./home.css" rel="stylesheet" />
+      <div class="home-container">
+        <div
+          data-thq="slider"
+          data-autoplay="false"
+          data-navigation="true"
+          data-pagination="true"
+          data-autoplay-delay="500"
+          class="home-swiper swiper"
+        >
+          <div data-thq="slider-wrapper" class="swiper-wrapper">
+            <div data-thq="slider-slide" class="home-slider-slide swiper-slide">
+              <div class="app-component-container app-component-root-class-name">
+                <div
+                  data-thq="slider"
+                  data-navigation="true"
+                  data-pagination="true"
+                  data-autoplay="true"
+                  class="app-component-swiper swiper"
+                >
+                  <div data-thq="slider-wrapper" class="swiper-wrapper">
+                    <div
+                      data-thq="slider-slide"
+                      class="app-component-slider-slide swiper-slide"
+                    ></div>
+                    <div
+                      data-thq="slider-slide"
+                      class="app-component-slider-slide1 swiper-slide"
+                    ></div>
+                    <div
+                      data-thq="slider-slide"
+                      class="app-component-slider-slide2 swiper-slide"
+                    ></div>
+                  </div>
+                  <div
+                    data-thq="slider-pagination"
+                    class="app-component-slider-pagination swiper-pagination swiper-pagination-bullets swiper-pagination-horizontal"
+                  >
+                    <div
+                      data-thq="slider-pagination-bullet"
+                      class="swiper-pagination-bullet"
+                    ></div>
+                    <div
+                      data-thq="slider-pagination-bullet"
+                      class="swiper-pagination-bullet"
+                    ></div>
+                    <div
+                      data-thq="slider-pagination-bullet"
+                      class="swiper-pagination-bullet"
+                    ></div>
+                  </div>
+                  <div
+                    data-thq="slider-button-prev"
+                    class="swiper-button-prev"
+                  ></div>
+                  <div
+                    data-thq="slider-button-next"
+                    class="swiper-button-next"
+                  ></div>
+                </div>
+              </div>
+            </div>
+            <div data-thq="slider-slide" class="home-slider-slide1 swiper-slide">
+              <h1 class="home-text">Heading</h1>
+            </div>
+            <div
+              data-thq="slider-slide"
+              class="home-slider-slide2 swiper-slide"
+            ></div>
+          </div>
+          <div
+            data-thq="slider-pagination"
+            class="home-slider-pagination swiper-pagination swiper-pagination-bullets swiper-pagination-horizontal"
+          >
+            <div
+              data-thq="slider-pagination-bullet"
+              class="swiper-pagination-bullet"
+            ></div>
+            <div
+              data-thq="slider-pagination-bullet"
+              class="swiper-pagination-bullet"
+            ></div>
+            <div
+              data-thq="slider-pagination-bullet"
+              class="swiper-pagination-bullet"
+            ></div>
+          </div>
+          <div data-thq="slider-button-prev" class="swiper-button-prev"></div>
+          <div data-thq="slider-button-next" class="swiper-button-next"></div>
         </div>
-        </div>
-        <ul data-thq="thq-dropdown-list">
-        <li data-thq="thq-dropdown">
-            <div data-thq="thq-dropdown-toggle">
-                <span>Sub-menu Item</span>
-            </div>
-        </li>
-        <li data-thq="thq-dropdown">
-            <div data-thq="thq-dropdown-toggle">
-            <span>Sub-menu Item</span>
-            <div data-thq="thq-dropdown-arrow">
-                <svg viewBox="0 0 1024 1024">
-                <path d="M426 726v-428l214 214z"></path>
-                </svg>
-            </div>
-            </div>
-            <ul data-thq="thq-dropdown-list">
-            <li data-thq="thq-dropdown">
-                <div data-thq="thq-dropdown-toggle">
-                <span>Sub-menu Item</span>
-                </div>
-            </li>
-            <li data-thq="thq-dropdown">
-                <div data-thq="thq-dropdown-toggle">
-                <span>Sub-menu Item</span>
-                </div>
-            </li>
-            <li data-thq="thq-dropdown">
-                <div data-thq="thq-dropdown-toggle">
-                <span>Sub-menu Item</span>
-                </div>
-            </li>
-            </ul>
-        </li>
-        </ul>
+      </div>
     </div>
-    <p>
-        Multiple Dropdowns
-    </p> -->
-    <div data-thq="thq-dropdown">
-        <div data-thq="thq-dropdown-toggle">
-        <span>Menu Item</span>
-        <div data-thq="thq-dropdown-arrow">
-            <svg viewBox="0 0 1024 1024">
-            <path d="M426 726v-428l214 214z"></path>
-            </svg>
-        </div>
-        </div>
-        <ul data-thq="thq-dropdown-list">
-        <li data-thq="thq-dropdown">
-            <div data-thq="thq-dropdown-toggle">
-                <span>Sub-menu Item</span>
-            </div>
-        </li>
-        <li data-thq="thq-dropdown">
-            <div data-thq="thq-dropdown-toggle">
-            <span>Sub-menu Item</span>
-            <div data-thq="thq-dropdown-arrow">
-                <svg viewBox="0 0 1024 1024">
-                <path d="M426 726v-428l214 214z"></path>
-                </svg>
-            </div>
-            </div>
-            <ul data-thq="thq-dropdown-list">
-            <li data-thq="thq-dropdown">
-                <div data-thq="thq-dropdown-toggle">
-                <span>Sub-menu Item</span>
-                </div>
-            </li>
-            <li data-thq="thq-dropdown">
-                <div data-thq="thq-dropdown-toggle">
-                <span>Sub-menu Item</span>
-                </div>
-            </li>
-            <li data-thq="thq-dropdown">
-                <div data-thq="thq-dropdown-toggle">
-                <span>Sub-menu Item</span>
-                </div>
-            </li>
-            </ul>
-        </li>
-        </ul>
-    </div>
+
     <script src="./index.umd.js"></script>
+    <link href="./style.css" rel="stylesheet"></link>
+
+    <style>
+    .app-component-container {
+      width: 100%;
+      height: 400px;
+      display: flex;
+      position: relative;
+      min-width: 500px;
+      min-height: 500px;
+      align-items: center;
+      flex-direction: column;
+      justify-content: center;
+    }
+    .app-component-swiper {
+      width: 100%;
+      height: 300px;
+      display: inline-block;
+    }
+    .app-component-slider-slide {
+      display: flex;
+      background-size: cover;
+      background-image: url('https://images.unsplash.com/photo-1699734825395-77d05df67aab?ixid=M3w5MTMyMXwwfDF8YWxsfDI3fHx8fHx8Mnx8MTY5OTg2NzE3Mnw&ixlib=rb-4.0.3&w=1500');
+      background-position: center;
+    }
+    .app-component-slider-slide1 {
+      display: flex;
+      background-size: cover;
+      background-image: url('https://images.unsplash.com/photo-1699694927472-46a4fcf68973?ixid=M3w5MTMyMXwwfDF8YWxsfDJ8fHx8fHwyfHwxNjk5ODY2MTgxfA&ixlib=rb-4.0.3&w=1500');
+    }
+    .app-component-slider-slide2 {
+      display: flex;
+      background-size: cover;
+      background-image: url('https://images.unsplash.com/photo-1699727152109-b5b9592641ca?ixid=M3w5MTMyMXwwfDF8YWxsfDR8fHx8fHwyfHwxNjk5ODY2MTgxfA&ixlib=rb-4.0.3&w=1500');
+    }
+    .app-component-slider-pagination {
+      display: block;
+    }
+    .app-component-root-class-name {
+      width: 100px;
+      height: 100px;
+    }
+
+    .home-container {
+      width: 100%;
+      display: flex;
+      overflow: auto;
+      min-height: 100vh;
+      align-items: center;
+      flex-direction: column;
+      justify-content: center;
+    }
+    .home-swiper {
+      width: 100%;
+      height: 500px;
+      display: inline-block;
+    }
+    .home-slider-slide {
+      display: flex;
+      align-items: center;
+      background-size: cover;
+      justify-content: center;
+      background-image: url("https://images.unsplash.com/photo-1698725224250-afb10355c2c4?ixid=M3w5MTMyMXwwfDF8YWxsfDEzfHx8fHx8Mnx8MTY5OTg2Nzg4MHw&ixlib=rb-4.0.3&w=1500");
+    }
+    .home-slider-slide1 {
+      display: flex;
+      align-items: flex-end;
+      background-size: cover;
+      justify-content: flex-end;
+      background-image: url("https://images.unsplash.com/photo-1502236334292-6e7102cd4ff1?ixid=M3w5MTMyMXwwfDF8YWxsfDJ8fHx8fHwyfHwxNjk5ODY3ODgwfA&ixlib=rb-4.0.3&w=1500");
+      background-position: center;
+    }
+    .home-text {
+      color: var(--dl-color-gray-white);
+      padding-right: var(--dl-space-space-twounits);
+      padding-bottom: var(--dl-space-space-twounits);
+    }
+    .home-slider-slide2 {
+      display: flex;
+      background-size: cover;
+      background-image: url("https://images.unsplash.com/photo-1699637341383-8a67b4d1adf3?ixid=M3w5MTMyMXwwfDF8YWxsfDE4fHx8fHx8Mnx8MTY5OTg2Nzg4MHw&ixlib=rb-4.0.3&w=1500");
+      background-position: center;
+    }
+    .home-slider-pagination {
+      display: block;
+    }
+
+    </style>
   </body>
 </html>
