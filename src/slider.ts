@@ -55,13 +55,13 @@ export class Slider {
         So, we need to map through all the selectors and find the direct children.
       */
 
-      for(const next of nextButtons) {
+      for(const next of (nextButtons ?? [])) {
         if (next.parentNode === sliderElement) {
           nextButton = next
         }
       }
 
-      for(const prev of prevButtons) {
+      for(const prev of (prevButtons ?? [])) {
         if (prev.parentNode === sliderElement) {
           prevButton = prev
         }
