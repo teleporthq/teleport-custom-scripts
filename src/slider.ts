@@ -25,7 +25,7 @@ const getDOMStringRepresentation = (node: HTMLElement | Text) => {
     return (node as Text).textContent;
   }
 
-  return "Cannot get string representation for this node type.";
+  return "";
 };
 
 export class Slider {
@@ -42,12 +42,13 @@ export class Slider {
       const prevButtons = sliderElement.querySelectorAll<HTMLElement>(
         '[data-thq="slider-button-prev"]',
       );
-      const paginationElm = sliderElement.querySelector<HTMLElement>(
+      const paginationElms = sliderElement.querySelectorAll<HTMLElement>(
         '[data-thq="slider-pagination"]',
       );
 
       let nextButton: HTMLElement | null = null
       let prevButton: HTMLElement | null = null
+      let paginationElm: HTMLElement | null = null
 
       /*
         The sliders can be nested any number of times.
@@ -64,6 +65,12 @@ export class Slider {
       for(const prev of (prevButtons ?? [])) {
         if (prev.parentNode === sliderElement) {
           prevButton = prev
+        }
+      }
+
+      for(const pagination of (paginationElms ?? [])) {
+        if (pagination.parentNode === sliderElement) {
+          paginationElm = pagination
         }
       }
 
@@ -118,7 +125,7 @@ export class Slider {
               el: paginationElm,
               clickable: true,
               renderBullet: (index: string) => {
-                return getDOMStringRepresentation(paginationElm.children[index]);
+                return getDOMStringRepresentation(paginationElm?.children[index]);
               },
             },
           }),
