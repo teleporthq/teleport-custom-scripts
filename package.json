@@ -1,15 +1,16 @@
 {
   "name": "@teleporthq/teleport-custom-scripts",
-  "version": "0.0.23",
-  "main": "src/index.js",
+  "version": "0.0.22-alpha-21",
+  "main": "dist/index.umd.js",
+  "module": "dist/index.mjs",
   "private": false,
   "description": "Custom scripts ready to be injected in to the playground",
   "scripts": {
-    "build": "echo 'build'",
-    "prepublish": "npm run build"
+    "build": "chomp",
+    "prepublishOnly": "vite build && vite build -c vite.config.umd.js"
   },
   "engines": {
-    "node": "16.x"
+    "node": "18.x"
   },
   "repository": {
     "type": "git",
@@ -18,5 +19,12 @@
   "author": "teleportHQ",
   "license": "MIT",
   "homepage": "https://teleporthq.io",
-  "devDependencies": {}
+  "devDependencies": {
+    "chomp": "^0.2.17",
+    "vite": "^4.4.11"
+  },
+  "dependencies": {
+    "focus-trap": "^7.5.4",
+    "swiper": "^11.0.3"
+  }
 }

@@ -1,0 +1,33 @@
+version = 0.1
+
+default-task = "copy:build"
+
+[[task]]
+name = "build:esm"
+targets = ["dist/component.mjs"]
+deps = ["src/##.ts"]
+run = "vite build"
+
+[[task]]
+name = 'build:umd'
+target = "dist/index.umd.js"
+deps = ['src/##.ts']
+run = "vite build -c vite.config.umd.js"
+
+[[task]]
+name = 'copy:build'
+target = 'test/index.umd.js'
+deps = ['build:umd', 'build:esm', 'copy:css']
+run = "cp dist/index.umd.js test"
+
+[[task]]
+name = 'copy:css'
+target = 'test/style.css'
+deps = ['build:umd', 'build:esm']
+run = 'cp dist/style.css test'
+
+[[task]]
+name = 'test'
+target = 'test/index.html'
+deps = ['copy:build', 'copy:css']
+run = 'npx http-server test'

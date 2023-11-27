@@ -1,9 +1,9 @@
-name: Publish
+name: Publish Alpha
 
 on:
   push:
-    tags:
-      - "v*"
+    branches:
+      - "alpha/**"
 
 jobs:
   publish:
@@ -19,6 +19,6 @@ jobs:
           node-version: "18.x"
           registry-url: "https://registry.npmjs.org"
       - run: npm ci
-      - run: npm publish --yes
+      - run: npm publish --tag alpha --yes
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
