@@ -29,4 +29,6 @@ if (appDiv) {
   observer.observe(document.body, { childList: true });
 } else {
   new Slider().init()
+  new Menu().init()
+  new Accordion().init()
 }
