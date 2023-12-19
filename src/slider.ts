@@ -1,4 +1,5 @@
 import { Swiper } from "swiper";
+import { SwiperOptions } from 'swiper/types'
 import { Navigation, Autoplay, Pagination } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/navigation";
@@ -112,8 +113,9 @@ export class Slider {
       }
 
       const modules = [Navigation, Autoplay, Pagination];
-      const swiperOptions = {
+      const swiperOptions: SwiperOptions = {
         modules,
+        observeSlideChildren: true,
         navigation: {
           nextEl: nextButton,
           prevEl: prevButton,
