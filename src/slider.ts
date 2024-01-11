@@ -127,6 +127,15 @@ export class Slider {
               el: paginationElm,
               clickable: true,
               renderBullet: (index: string) => {
+                const paginationIcon = paginationElm?.children[index]
+                if (paginationIcon) {
+                  return getDOMStringRepresentation(paginationIcon);
+                }
+
+                if (!paginationIcon && paginationElm?.children?.[0]) {
+                  return getDOMStringRepresentation(paginationElm?.children[0] as HTMLElement);
+                }
+
                 return getDOMStringRepresentation(paginationElm?.children[index]);
               },
             },
