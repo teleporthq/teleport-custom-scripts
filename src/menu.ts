@@ -1,9 +1,9 @@
 import { TeleportInteractiveElement } from "./types";
-import * as teleport from './utils'
+import * as teleport from "./utils";
 
 export class Menu implements TeleportInteractiveElement {
   get styles() {
-    return ``
+    return ``;
   }
 
   init = () => {
@@ -15,10 +15,7 @@ export class Menu implements TeleportInteractiveElement {
   };
 
   getMenuElementsAndAddEventsByDataAttrs = (dataAttr: string) => {
-    const allHeaders = teleport.getAllElementsByDataAttribute(
-      "role",
-      "Header"
-    );
+    const allHeaders = teleport.getAllElementsByDataAttribute("role", "Header");
 
     allHeaders.forEach((header) => {
       const burgerBtn = teleport.getElByDataAttribute(
@@ -47,6 +44,17 @@ export class Menu implements TeleportInteractiveElement {
 
       closeBtn.addEventListener("click", () => {
         mobileMenu.classList.remove("teleport-show");
+      });
+
+      // check if user clicked on a scrollTo link in the mobile menu and close the menu
+      mobileMenu.addEventListener("click", (event) => {
+        const target = event.target as HTMLElement;
+        if (
+          target.tagName === "A" &&
+          target.getAttribute("href")?.startsWith("#")
+        ) {
+          mobileMenu.classList.remove("teleport-show");
+        }
       });
     });
   };
@@ -81,41 +89,38 @@ export class Menu implements TeleportInteractiveElement {
       }
 
       burgerBtn.addEventListener("click", () => {
-        window.addEventListener(
-          "click",
-          function checkSameLinkClicked(event) {
-            if (!event) {
-              return;
-            }
-
-            // check for links in ascendent elements
-            let currentElement = event.target;
-
-            while (currentElement !== document.body && !currentElement.href) {
-              currentElement = currentElement.parentNode;
-            }
-
-            if (!currentElement.href) {
-              return;
-            }
-
-            if (!mobileMenu) {
-              return;
-            }
-
-            if (currentElement.href) {
-              document.body.style.overflow = bodyOverflow;
-            }
-
-            if (currentElement.pathname === window.location.pathname) {
-              mobileMenu.classList.remove("teleport-show");
-              mobileMenu.classList.remove("thq-show");
-              mobileMenu.classList.remove("thq-translate-to-default");
-            }
-
-            this.removeEventListener("click", checkSameLinkClicked);
+        window.addEventListener("click", function checkSameLinkClicked(event) {
+          if (!event) {
+            return;
           }
-        );
+
+          // check for links in ascendent elements
+          let currentElement = event.target;
+
+          while (currentElement !== document.body && !currentElement.href) {
+            currentElement = currentElement.parentNode;
+          }
+
+          if (!currentElement.href) {
+            return;
+          }
+
+          if (!mobileMenu) {
+            return;
+          }
+
+          if (currentElement.href) {
+            document.body.style.overflow = bodyOverflow;
+          }
+
+          if (currentElement.pathname === window.location.pathname) {
+            mobileMenu.classList.remove("teleport-show");
+            mobileMenu.classList.remove("thq-show");
+            mobileMenu.classList.remove("thq-translate-to-default");
+          }
+
+          this.removeEventListener("click", checkSameLinkClicked);
+        });
         document.body.style.overflow = "hidden";
 
         mobileMenu.classList.add("teleport-show");
@@ -129,6 +134,19 @@ export class Menu implements TeleportInteractiveElement {
         mobileMenu.classList.remove("teleport-show");
         mobileMenu.classList.remove("thq-show");
         mobileMenu.classList.remove("thq-translate-to-default");
+      });
+
+      // check if user clicked on a scrollTo link in the mobile menu and close the menu
+      mobileMenu.addEventListener("click", (event) => {
+        const target = event.target as HTMLElement;
+        if (
+          target.tagName === "A" &&
+          target.getAttribute("href")?.startsWith("#")
+        ) {
+          mobileMenu.classList.remove("teleport-show");
+          mobileMenu.classList.remove("thq-show");
+          mobileMenu.classList.remove("thq-translate-to-default");
+        }
       });
     });
   };
