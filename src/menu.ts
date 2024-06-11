@@ -139,10 +139,7 @@ export class Menu implements TeleportInteractiveElement {
       // check if user clicked on a scrollTo link in the mobile menu and close the menu
       mobileMenu.addEventListener("click", (event) => {
         const target = event.target as HTMLElement;
-        if (
-          target.tagName === "A" &&
-          target.getAttribute("href")?.startsWith("#")
-        ) {
+        if (target instanceof HTMLAnchorElement) {
           mobileMenu.classList.remove("teleport-show");
           mobileMenu.classList.remove("thq-show");
           mobileMenu.classList.remove("thq-translate-to-default");
