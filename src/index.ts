@@ -1,6 +1,6 @@
-import { Slider } from './slider'
-import { Menu } from './menu'
-import { Accordion } from './accordion'
+import { Slider } from "./slider";
+import { Menu } from "./menu";
+import { Accordion } from "./accordion";
 
 let url = location.href;
 document.body.addEventListener(
@@ -8,9 +8,9 @@ document.body.addEventListener(
   () => {
     requestAnimationFrame(() => {
       if (url !== location.href) {
-        new Slider().init()
-        new Menu().init()
-        new Accordion().init()
+        new Slider().init();
+        new Menu().init();
+        new Accordion().init();
         url = location.href;
       }
     });
@@ -18,17 +18,42 @@ document.body.addEventListener(
   true
 );
 
-const appDiv = document.getElementById("app");
-if (appDiv) {
-  const observer = new MutationObserver(() => {
-    new Slider().init()
-    new Menu().init()
-    new Accordion().init()
-    observer.disconnect();
-  });
-  observer.observe(document.body, { childList: true });
+const initializeComponents = () => {
+  new Slider().init();
+  new Menu().init();
+  new Accordion().init();
+};
+
+const isReactEnvironment = () => {
+  // Simple check to see if we are in a React environment
+  return (
+    typeof (window as any).React !== "undefined" &&
+    typeof (window as any).ReactDOM !== "undefined"
+  );
+};
+
+const setupMutationObserver = () => {
+  const appDiv = document.getElementById("appDiv");
+
+  if (appDiv) {
+    const observer = new MutationObserver(() => {
+      initializeComponents();
+      observer.disconnect();
+    });
+    observer.observe(document.body, { childList: true });
+  } else {
+    initializeComponents();
+  }
+};
+
+if (isReactEnvironment()) {
+  // React environment
+  (window as any).React.useEffect(() => {
+    setupMutationObserver();
+  }, []);
 } else {
-  new Slider().init()
-  new Menu().init()
-  new Accordion().init()
+  // Plain HTML environment
+  document.addEventListener("DOMContentLoaded", () => {
+    setupMutationObserver();
+  });
 }
