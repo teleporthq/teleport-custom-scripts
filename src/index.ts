@@ -19,8 +19,8 @@ document.body.addEventListener(
 );
 
 const initializeComponents = () => {
-  new Slider().init();
   new Menu().init();
+  new Slider().init();
   new Accordion().init();
 };
 
