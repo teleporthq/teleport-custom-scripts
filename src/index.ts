@@ -19,7 +19,6 @@ document.body.addEventListener(
 );
 
 const initializeComponents = () => {
-  console.log("Mihai");
   new Slider().init();
   new Menu().init();
   new Accordion().init();
