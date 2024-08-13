@@ -1,6 +1,6 @@
 {
   "name": "@teleporthq/teleport-custom-scripts",
-  "version": "0.0.28",
+  "version": "0.0.29",
   "main": "dist/index.umd.js",
   "module": "dist/index.mjs",
   "private": false,
