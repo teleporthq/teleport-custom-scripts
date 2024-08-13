@@ -19,6 +19,7 @@ document.body.addEventListener(
 );
 
 const initializeComponents = () => {
+  console.log("Mihai");
   new Slider().init();
   new Menu().init();
   new Accordion().init();
@@ -51,6 +52,12 @@ if (isReactEnvironment()) {
   (window as any).React.useEffect(() => {
     setupMutationObserver();
   }, []);
+} else if (
+  document.readyState === "complete" ||
+  document.readyState === "interactive"
+) {
+  // The DOM is already loaded
+  setupMutationObserver();
 } else {
   // Plain HTML environment
   document.addEventListener("DOMContentLoaded", () => {
